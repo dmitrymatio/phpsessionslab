@@ -1,41 +1,17 @@
 <?php
 //read users.txt after submitting
 
-function logUser() {
+function RegisterUser($logname, $logpass) {
 
 
     $file="users.txt";
-
-    $fopen = fopen($file, "r+");
-
-    $fread = fread($fopen,filesize($file));
+    $preadd = "\n$logname,$logpass,12000,0,0";
+    $fopen = fopen($file, "a");
+    $newreg = $preadd;
+    fwrite($fopen, $newreg);
 
     fclose($fopen);
-
-    $remove = "\n";
-
-    $split = explode($remove, $fread);
-
-    $array[] = null;
-    $tab = "\t";
-
-    foreach ($split as $string)
-    {
-        $row = explode($tab, $string);
-        array_push($array,$row);
-    }
-    echo "<pre>";
-    print_r($array);
-    echo "</pre>";
-
-    if($array){
-    for($x=0;$x<count($array); $x++){
-        if($array == $x) {
-            echo "cheese";
-        }
-    }
-    }
-
+    echo $logname ." successfully added to ". $file;
 }
 
 function matcher($name,$pass) {
@@ -55,14 +31,15 @@ function matcher($name,$pass) {
 // Note our use of ===.  Simply == would not work as expected
 // because the position of 'a' was the 0th (first) character.
     if ($pos1 == true && $pos2 == true ) {
-        echo "user and password match";
-    } else {
-      echo "fail it";
-       /* ob_start();
+        ob_start();
         header('Location:secret.php');
         ob_end_flush();
-        die();*/
+        die();
+    } else {
+      echo "fail it";
+       /* */
     }
 }
-echo matcher("Jose","6767");
+//echo matcher("Jose","6767");
+//echo RegisterUser("Ricardo","4345");
 ?>
