@@ -1,6 +1,2 @@
-<?php
-// shows: logged in as:
-//Tam for: 1h 02m 44s
-
-
-//come to this page at feb 8 9:29:00
+<?php session_start(); /* Starts the session */session_destroy(); /* Destroy started session */header("location:login.php");  /* Redirect to login page */exit;
+?>

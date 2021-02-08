@@ -1,12 +1,54 @@
-<?php
-//if user, pass are in users.txt, update that timestamp
-//create sessions and
-// $_SESSION['username'] and $_SESSION['logintime']
+<?php session_start(); /* Starts the session */
+/* Check Login form submitted */if (isset($_POST['Submit'])) {
+    /* Define username and associated password array */$logins = array('Alex' => '123456','username1' => 'password1','username2' => 'password2');
 
-//$_SESSION['lastactivitytime']
+    /* Check and assign submitted Username and Password to new variable */$Username = isset($_POST['Username']) ? $_POST['Username'] : '';
+    $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
 
-// shows: logged in as:
-//Tam for: 1h 02m 44s
+    /* Check Username and Password existence in defined array */if (isset($logins[$Username]) && $logins[$Username] == $Password) {
+        /* Success: Set session variables and redirect to Protected page  */$_SESSION['UserData']['Username']=$logins[$Username];
+        header("location:private.php");
+        exit;
+    } else {
+        /*Unsuccessful attempt: Set error message */$msg="<span style='color:red'>Invalid Login Details</span>";
+    }
+}
+?>
 
 
-//come to this page at feb 8 9:29:00
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="box">
+<form action="" method="post" name="Login_Form">
+
+  
+    <?php if (isset($msg)) {?>
+
+     <?php echo $msg;?>
+
+    <?php } ?>
+    <h1>Sessions Lab</h1>
+    <br>
+
+    <h3>Username</h3>
+    <td><input name="Username" type="text" class="email"></td>
+
+
+    <h3>Password</h3>
+    <td><input name="Password" type="password" class="email"></td>
+
+
+    <td><input name="Submit" type="submit" value="Login" class="btn"></td>
+    <td><input name="Submit" type="submit" value="Register" id="btn2"></td>
+
+  </table>
+</form>
+</div>
+
+</body>
+</html>
