@@ -1,4 +1,5 @@
 <?php session_start(); /* Starts the session */
+$success = true;
 if(!isset($_SESSION['UserData']['Username'])){
 header("location:login.php");
 exit;
